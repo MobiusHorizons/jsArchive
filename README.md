@@ -9,7 +9,9 @@ Dependencies
 depends on FileSaver.js and Blob.js from eligrey on github. These have been added as submodules.
 To build simply call
 
+```bash
 $ cd jsArchive 
 $ git submodule update --init --recursive # pulls dependencies
+```
 
 Then open Demo.html. This example works offline. It allows you to add and view content of text, image, and video files.
