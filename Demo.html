@@ -180,8 +180,8 @@
 	}
 	
 	function download(){
-		var b = a.getBLob();
-		saveAs(b,document.etElementById('filename').value);
+		var b = a.getBlob();
+		saveAs(b,document.getElementById('filename').value);
 	}
 
 	window.onresize = resize;
