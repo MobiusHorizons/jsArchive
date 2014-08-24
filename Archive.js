@@ -34,8 +34,11 @@ add : function(blob, identifier, atribs){
 	      entry.type = blob.type;
 	      atribs = atribs || {};
 	      entry.atribs = atribs;
-	      if (this.resources){
-	      	      entry.start = self.resources.size;
+	      if (self.resources){
+	      	  entry.start = self.resources.size;
+			  if (name in self.header.files){ // duplicate
+				 self.remove(name);
+			  }
 		      var tmp = new Blob([self.resources,blob]);
 		      self.resources = tmp;
 	      } else {
@@ -49,8 +52,25 @@ add : function(blob, identifier, atribs){
 	      return self.resources.slice(entry.start, entry.start + entry.length);
       },
 
-// TODO: add remove support
-
+	/* remove ( name [, remove] ):
+	 * removes file with given name from archive.
+	 */
+remove : function( name ) {
+	var self = this;
+	if ( name in self.header.files){
+		var f = self.header.files[name];
+		var n = new Blob();
+		if ( f.start != 0){
+			n = self.resources.slice(0,f.start+f.length);
+		}
+		if (f.start + f.length != self.resources.length){
+			n = new Blob([n,self.resources.slice(f.start+f.length, self.resources.length)]);
+		}
+		self.resources = n;
+		// remove the name from the array;
+		delete self.header.files[name];
+	}
+},
 
 	/* get( name ):
  	 * get file by name
@@ -61,7 +81,7 @@ get : function(name){
 	      if (name in self.header.files){
 		      var f = self.header.files[name];
 		      console.log(name + ":" + f.type);
-		      return this.resources.slice(f.start,f.start + f.length,f.type);
+		      return self.resources.slice(f.start,f.start + f.length,f.type);
 	      }
       },
 	/* list():

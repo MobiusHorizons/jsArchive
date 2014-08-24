@@ -27,7 +27,7 @@ TODO's
 
 - ~~I would love to make this work in Internet Explorer (at least 10+) I work on linux, so this is hard, but if anyone wants to take a look please let me know.~~ Tested working in ie 10. Had to enable downloads in internet options.
 
-- add support for removing files.
+- ~~add support for removing files.~~
 
-- add duplicate filename handling.
+- ~~add duplicate filename handling.~~
 
