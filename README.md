@@ -31,3 +31,5 @@ TODO's
 
 - ~~add duplicate filename handling.~~
 
+- add support for deletion. 
+
